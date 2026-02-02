@@ -3,6 +3,7 @@
 # freeze computational output
 # (see https://quarto.org/docs/projects/code-execution.html#freeze)
 freeze: true
+#Render the file first then render the website
 
 # Enable banner style title blocks
 title-block-banner: false
