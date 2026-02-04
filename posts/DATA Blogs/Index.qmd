@@ -1,11 +1,13 @@
 ---
 title: "Index.qmd"
 author: "Faith Rhinehart"
+execute: 
+  echo: true
+  warning: false
 format: 
   html:
     embed-resources: true
 ---
-##Packages and reading in the datasets
 ```{r}
 library(dplyr)
 library(ggplot2)
@@ -16,49 +18,63 @@ public_response <- readr::read_csv('https://raw.githubusercontent.com/rfordatasc
 pixarMovies <- merge(pixar_films, public_response, by = "film") |> select(1, 3:9) |> slice(1:10, 12:24)
 ```
 
-## Finding highest score
 ```{r}
-#Highest rotten tomatoes score
+#Highest rotten tomatoes Rating
 high_rotten <- pixarMovies |> arrange(desc(rotten_tomatoes)) |> select(1,5) |>
   mutate(Movie = fct_reorder(film, rotten_tomatoes))
 ```
 
 ```{r}
-#Highest meta critic score
+#Highest meta critic Rating
 high_meta <- pixarMovies |> arrange(desc(metacritic)) |> select(1,6) |>
   mutate(Movie = fct_reorder(film, metacritic))
 View(high_meta)
 ```
 
 ```{r}
-#Highest critics choice score
+#Highest critics choice Rating
 high_critic <- pixarMovies |> arrange(desc(critics_choice)) |> select(1,8) |> slice(1:21) |>
   mutate(Movie = fct_reorder(film, critics_choice))
 View(high_critic)
 ```
 
-##Visualizations
+ 
+
+#Introduction:
+_This project analyzes Pixar film ratings using a combined data set of movie descriptions and public response metrics. Two data sets were merged to compare ratings across three platforms: Rotten Tomatoes, Metacritic, and Critics Choice. Rotten Tomatoes reports the percentage of positive reviews, Metacritic provides a weighted average critic score, and Critics Choice reflects ratings from professional film critics.The main variables of interest are film title, Rotten Tomatoes rating, Metacritic score, and Critics Choice rating. The data set includes 24 observations and 8 variables. The central question of this analysis is which Pixar films receive the highest overall ratings across these three platforms._
+
+_The data come from the TidyTuesday GitHub repository. Linked here: https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-03-11/readme.md_
+
+_Some films are excluded due to missing ratings, such as Luca, which has no ratings available, and others lack Critics Choice scores which is Toy Story and A Bug's Life. Meaning those two films were excluded in the Critic's Choice graph. Additionally, the data set does not include all Pixar films, which should be considered when interpreting the results._
+
+
+#Primary Visualizations
+
 ```{r}
 #Rotten Tomatoes
 ggplot(data = high_rotten, aes(x = Movie, y = rotten_tomatoes, fill = rotten_tomatoes)) +
   geom_col() +
   coord_flip() +
-  labs(y = "Rotten Tomatoes Score",
-       title = "Rotten Tomatoes Score for Pixar Movies") +
+  labs(y = "Rotten Tomatoes Rating",
+       title = "Rotten Tomatoes Rating for Pixar Movies") +
   scale_fill_viridis_c() +
   theme_minimal()
 ```
+
+_The Rotten Tomatoes visualization shows that Toy Story and Toy Story 2 share the highest rating, each receiving a perfect score of 100. An interesting pattern in this graph is that many films have identical or very similar ratings, making this distribution more compressed than the others. Compared to Metacritic and Critics Choice, Rotten Tomatoes shows the least variation among films, suggesting a generally strong love for Pixar movies._
 
 ```{r}
 #Meta Critic
 ggplot(data = high_meta, aes(x = Movie, y = metacritic, fill = metacritic)) +
   geom_col() +
   coord_flip() +
-  labs(y = "Metacritic Score",
-       title = "Metacritic Score for Pixar Movies") +
+  labs(y = "Metacritic Rating",
+       title = "Metacritic Rating for Pixar Movies") +
   scale_fill_viridis_c() +
   theme_minimal()
 ```
+
+_The Metacritic visualization reveals that Ratatouille has the highest Metacritic rating among the films analyzed. This result is interesting because Ratatouille falls closer to the middle of the distribution for both Rotten Tomatoes and Critics Choice ratings. Additionally, the Toy Story films rank lower on Metacritic than they do on the other two platforms, indicating differences in how each rating system evaluates the films._
 
 ```{r}
 #Critics Choice
@@ -66,44 +82,18 @@ ggplot(data = high_critic, aes(x = Movie, y = critics_choice, fill = critics_cho
   geom_col() +
   coord_flip() +
   labs(
-    y = "Critic's Choice Score",
-    title = "Critic's Choice Score for Pixar Movies") +
+    y = "Critic's Choice Rating",
+    title = "Critic's Choice Rating for Pixar Movies") +
   scale_fill_viridis_c() +
   theme_minimal()
 ```
 
-Introduction:
-what data set are you working with?
+_The Critics Choice visualization indicates that Toy Story 2 holds the highest Critics Choice rating, with Toy Story 3 and Toy Story 4 also ranking within the top five. Although the original Toy Story does not have a Critics Choice rating in this data set, its strong performance in the other two rating systems suggests it likely would have scored highly here as well. Overall, this pattern highlights how well received the Toy Story franchise has been by critics and audiences._
 
-_Pixar Films descriptions and public response to each film. Two data sets were combined into one_
+#Conclusion and Wrap-Up
 
-what variables are you most interested in? How many observations are in your data set?
+_One limitation of this analysis is the exclusion of certain films due to missing rating data. While these omissions were necessary to maintain accuracy in the visualizations, they reduce the overall sample size and may slightly limit the conclusions that can be drawn. Aside from this data exclusion, I don't believe there are any other flaws with my approach. For future analysis I would explore whether film ratings influence the ratings. Another potential direction would be to examine movie runtimes and analyze whether Pixar films have generally increased in length over time of when the movie was released._
 
-_Variables interested in: film, rotten tomatoes, metacritic, and critics choice_
+# Connection to Class Ideas
 
-_There are 24 observations with 8 variables_
-
-what is your question of interest?
-
-_Which films has the overall highest score for rotten tomatoes, meta critics and critics choice_
-
-where did you get the data from? (If possible, give a link to the data source).
-
-_Link to both data sets: Link to data set: https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-03-11/readme.md_
-
-what other pieces of context are important to explain to the reader?
-
-_That a few movies don't have a critics choice score so when that visual is made those observations will be taken out of the data set and noted. Luca doesn't have a score for any of the three so it will be taken out of the dataset._  
-
-Primary Visualizations
-choose an appropriate visualization, eliminate clutter, and focus attention as appropriate to answer your question of interest.
-
-provide a written interpretation of each visualization you have, explaining what a reader should “take away” from each visualization.
-
-Conclusion and Wrap-Up
-are there any flaws with your approach to analyzing the data you’ve selected?
-
-are there future directions you would go if you had additional data or more time?
-
-Connection to Class Ideas
-At the end of your write-up, you should connect your visualization(s) to ideas from class. In what ways would you argue your visualization(s) are effective ways of communicating information?
+_These visualizations connect to class concepts by following best practices for effective data communication. The bar plots all start at zero, ensuring accurate visual comparison of ratings across films. Additionally, sequential color scales are used to represent low-to-high values, making it easier for viewers to interpret differences in ratings. Together, these design choices help clearly and effectively communicate patterns in the data._  
