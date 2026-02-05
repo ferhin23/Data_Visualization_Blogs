@@ -2,7 +2,7 @@
 title: "Blog Post #1: Movie Ratings"
 author: "Faith Rhinehart"
 execute: 
-  echo: false
+  echo: true
   warning: false
 format: 
   html:
