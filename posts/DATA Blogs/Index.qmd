@@ -2,7 +2,7 @@
 title: "Index.qmd"
 author: "Faith Rhinehart"
 execute: 
-  echo: true
+  echo: false
   warning: false
 format: 
   html:
@@ -40,7 +40,7 @@ View(high_critic)
 
  
 
-#Introduction:
+# Introduction:
 _This project analyzes Pixar film ratings using a combined data set of movie descriptions and public response metrics. Two data sets were merged to compare ratings across three platforms: Rotten Tomatoes, Metacritic, and Critics Choice. Rotten Tomatoes reports the percentage of positive reviews, Metacritic provides a weighted average critic score, and Critics Choice reflects ratings from professional film critics.The main variables of interest are film title, Rotten Tomatoes rating, Metacritic score, and Critics Choice rating. The data set includes 24 observations and 8 variables. The central question of this analysis is which Pixar films receive the highest overall ratings across these three platforms._
 
 _The data come from the TidyTuesday GitHub repository. Linked here: https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-03-11/readme.md_
@@ -48,7 +48,7 @@ _The data come from the TidyTuesday GitHub repository. Linked here: https://gith
 _Some films are excluded due to missing ratings, such as Luca, which has no ratings available, and others lack Critics Choice scores which is Toy Story and A Bug's Life. Meaning those two films were excluded in the Critic's Choice graph. Additionally, the data set does not include all Pixar films, which should be considered when interpreting the results._
 
 
-#Primary Visualizations
+# Primary Visualizations
 
 ```{r}
 #Rotten Tomatoes
@@ -90,7 +90,7 @@ ggplot(data = high_critic, aes(x = Movie, y = critics_choice, fill = critics_cho
 
 _The Critics Choice visualization indicates that Toy Story 2 holds the highest Critics Choice rating, with Toy Story 3 and Toy Story 4 also ranking within the top five. Although the original Toy Story does not have a Critics Choice rating in this data set, its strong performance in the other two rating systems suggests it likely would have scored highly here as well. Overall, this pattern highlights how well received the Toy Story franchise has been by critics and audiences._
 
-#Conclusion and Wrap-Up
+# Conclusion and Wrap-Up
 
 _One limitation of this analysis is the exclusion of certain films due to missing rating data. While these omissions were necessary to maintain accuracy in the visualizations, they reduce the overall sample size and may slightly limit the conclusions that can be drawn. Aside from this data exclusion, I don't believe there are any other flaws with my approach. For future analysis I would explore whether film ratings influence the ratings. Another potential direction would be to examine movie runtimes and analyze whether Pixar films have generally increased in length over time of when the movie was released._
 

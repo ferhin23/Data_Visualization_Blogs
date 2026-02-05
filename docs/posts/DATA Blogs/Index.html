@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
 }
-
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-{ counter-reset: source-line 0; }
-pre.numberSource code > span
-{ position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-{ content: counter(source-line);
-position: relative; left: -1em; text-align: right; vertical-align: baseline;
-border: none; display: inline-block;
--webkit-touch-callout: none; -webkit-user-select: none;
--khtml-user-select: none; -moz-user-select: none;
--ms-user-select: none; user-select: none;
-padding: 0 4px; width: 4em;
-}
-pre.numberSource { margin-left: 3em; padding-left: 4px; }
-div.sourceCode
-{ }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -3910,45 +3875,15 @@ vertical-align: -.125em;
 </header>
 
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>pixar_films <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-03-11/pixar_films.csv&#39;</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>public_response <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-03-11/public_response.csv&#39;</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>pixarMovies <span class="ot">&lt;-</span> <span class="fu">merge</span>(pixar_films, public_response, <span class="at">by =</span> <span class="st">&quot;film&quot;</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="dv">1</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">9</span>) <span class="sc">|&gt;</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">12</span><span class="sc">:</span><span class="dv">24</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Highest rotten tomatoes Rating</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>high_rotten <span class="ot">&lt;-</span> pixarMovies <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(rotten_tomatoes)) <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">5</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Movie =</span> <span class="fu">fct_reorder</span>(film, rotten_tomatoes))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Highest meta critic Rating</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>high_meta <span class="ot">&lt;-</span> pixarMovies <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(metacritic)) <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">6</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Movie =</span> <span class="fu">fct_reorder</span>(film, metacritic))</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(high_meta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Highest critics choice Rating</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>high_critic <span class="ot">&lt;-</span> pixarMovies <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(critics_choice)) <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">8</span>) <span class="sc">|&gt;</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">21</span>) <span class="sc">|&gt;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Movie =</span> <span class="fu">fct_reorder</span>(film, critics_choice))</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(high_critic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>#Introduction: <em>This project analyzes Pixar film ratings using a combined data set of movie descriptions and public response metrics. Two data sets were merged to compare ratings across three platforms: Rotten Tomatoes, Metacritic, and Critics Choice. Rotten Tomatoes reports the percentage of positive reviews, Metacritic provides a weighted average critic score, and Critics Choice reflects ratings from professional film critics.The main variables of interest are film title, Rotten Tomatoes rating, Metacritic score, and Critics Choice rating. The data set includes 24 observations and 8 variables. The central question of this analysis is which Pixar films receive the highest overall ratings across these three platforms.</em></p>
+<section id="introduction" class="level1">
+<h1>Introduction:</h1>
+<p><em>This project analyzes Pixar film ratings using a combined data set of movie descriptions and public response metrics. Two data sets were merged to compare ratings across three platforms: Rotten Tomatoes, Metacritic, and Critics Choice. Rotten Tomatoes reports the percentage of positive reviews, Metacritic provides a weighted average critic score, and Critics Choice reflects ratings from professional film critics.The main variables of interest are film title, Rotten Tomatoes rating, Metacritic score, and Critics Choice rating. The data set includes 24 observations and 8 variables. The central question of this analysis is which Pixar films receive the highest overall ratings across these three platforms.</em></p>
 <p><em>The data come from the TidyTuesday GitHub repository. Linked here: https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-03-11/readme.md</em></p>
 <p><em>Some films are excluded due to missing ratings, such as Luca, which has no ratings available, and others lack Critics Choice scores which is Toy Story and A Bug’s Life. Meaning those two films were excluded in the Critic’s Choice graph. Additionally, the data set does not include all Pixar films, which should be considered when interpreting the results.</em></p>
-<p>#Primary Visualizations</p>
+</section>
+<section id="primary-visualizations" class="level1">
+<h1>Primary Visualizations</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Rotten Tomatoes</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> high_rotten, <span class="fu">aes</span>(<span class="at">x =</span> Movie, <span class="at">y =</span> rotten_tomatoes, <span class="at">fill =</span> rotten_tomatoes)) <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Rotten Tomatoes Rating&quot;</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Rotten Tomatoes Rating for Pixar Movies&quot;</span>) <span class="sc">+</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3959,14 +3894,6 @@ vertical-align: -.125em;
 </div>
 <p><em>The Rotten Tomatoes visualization shows that Toy Story and Toy Story 2 share the highest rating, each receiving a perfect score of 100. An interesting pattern in this graph is that many films have identical or very similar ratings, making this distribution more compressed than the others. Compared to Metacritic and Critics Choice, Rotten Tomatoes shows the least variation among films, suggesting a generally strong love for Pixar movies.</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Meta Critic</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> high_meta, <span class="fu">aes</span>(<span class="at">x =</span> Movie, <span class="at">y =</span> metacritic, <span class="at">fill =</span> metacritic)) <span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Metacritic Rating&quot;</span>,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Metacritic Rating for Pixar Movies&quot;</span>) <span class="sc">+</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3977,15 +3904,6 @@ vertical-align: -.125em;
 </div>
 <p><em>The Metacritic visualization reveals that Ratatouille has the highest Metacritic rating among the films analyzed. This result is interesting because Ratatouille falls closer to the middle of the distribution for both Rotten Tomatoes and Critics Choice ratings. Additionally, the Toy Story films rank lower on Metacritic than they do on the other two platforms, indicating differences in how each rating system evaluates the films.</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Critics Choice</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> high_critic, <span class="fu">aes</span>(<span class="at">x =</span> Movie, <span class="at">y =</span> critics_choice, <span class="at">fill =</span> critics_choice)) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Critic&#39;s Choice Rating&quot;</span>,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Critic&#39;s Choice Rating for Pixar Movies&quot;</span>) <span class="sc">+</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3995,8 +3913,11 @@ vertical-align: -.125em;
 </div>
 </div>
 <p><em>The Critics Choice visualization indicates that Toy Story 2 holds the highest Critics Choice rating, with Toy Story 3 and Toy Story 4 also ranking within the top five. Although the original Toy Story does not have a Critics Choice rating in this data set, its strong performance in the other two rating systems suggests it likely would have scored highly here as well. Overall, this pattern highlights how well received the Toy Story franchise has been by critics and audiences.</em></p>
-<p>#Conclusion and Wrap-Up</p>
+</section>
+<section id="conclusion-and-wrap-up" class="level1">
+<h1>Conclusion and Wrap-Up</h1>
 <p><em>One limitation of this analysis is the exclusion of certain films due to missing rating data. While these omissions were necessary to maintain accuracy in the visualizations, they reduce the overall sample size and may slightly limit the conclusions that can be drawn. Aside from this data exclusion, I don’t believe there are any other flaws with my approach. For future analysis I would explore whether film ratings influence the ratings. Another potential direction would be to examine movie runtimes and analyze whether Pixar films have generally increased in length over time of when the movie was released.</em></p>
+</section>
 <section id="connection-to-class-ideas" class="level1">
 <h1>Connection to Class Ideas</h1>
 <p><em>These visualizations connect to class concepts by following best practices for effective data communication. The bar plots all start at zero, ensuring accurate visual comparison of ratings across films. Additionally, sequential color scales are used to represent low-to-high values, making it easier for viewers to interpret differences in ratings. Together, these design choices help clearly and effectively communicate patterns in the data.</em></p>
