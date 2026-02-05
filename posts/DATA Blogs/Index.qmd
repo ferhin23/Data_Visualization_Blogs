@@ -1,5 +1,5 @@
 ---
-title: "Index.qmd"
+title: "Blog Post #1: Movie Ratings"
 author: "Faith Rhinehart"
 execute: 
   echo: false
