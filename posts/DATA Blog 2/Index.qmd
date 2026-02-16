@@ -1,5 +1,6 @@
 ---
-title: "Index"
-format: html
+title: "Blog Post #2: ____"
+author: "Faith Rhinehart"
+date: "02-18-2026"
 ---
 
