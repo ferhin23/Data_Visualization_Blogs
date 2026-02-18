@@ -3917,14 +3917,13 @@ vertical-align: -.125em;
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>movies <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2021/2021-03-09/movies.csv&#39;</span>)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>bechdel <span class="ot">&lt;-</span> movies <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">result_binary =</span> <span class="fu">if_else</span>(binary <span class="sc">==</span> <span class="st">&quot;PASS&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">24</span>, <span class="dv">28</span>, <span class="dv">35</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(bechdel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>bechdel <span class="ot">&lt;-</span> movies <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">result_binary =</span> <span class="fu">if_else</span>(binary <span class="sc">==</span> <span class="st">&quot;PASS&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">24</span>, <span class="dv">28</span>, <span class="dv">35</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>##Introduction</p>
+<p>#Introduction:</p>
 <p><em>The Bechdel Test, created by Alison Bechdel, is a measure of women representation in film and other forms of fiction to expose Hollywood’s gender bias. In order to pass the test the work must pass three criteria of having at least two named women that have a conversation with each other and that conversation can not be about a man. This basic criteria allows for the bare minimum amount of depth for female characters. This project looks at a data set movies from 1970 - 2013 of whether or not they pass the Bechdel test or not. The data set includes 1794 observations and 34 variables. The main variables of interest are film title, year of release, binary and IMDb rating. The central question of this analysis is how does the genre, imdb, and budget relate to a movie passing the Bechdel test and how has it change throughout the years.</em></p>
 <p><em>The data come from the TidyTuesday GitHub repository. Linked here:</em> <em>https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-03-09/readme.md</em></p>
 <p><em>It is important to note that some films have missing values for IMDb rating and genre. This should be considered when interpreting results for these two variables. The binary variable has also been changed to an indicator variable called ‘result_binary’ where 1 means the film passed the Bechdel test and 0 means the film failed the Bechdel test. This is to allow for easier interpretations.</em></p>
-<p>##Primary Visualizations</p>
+<p>#Primary Visualizations:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mean_bechdel <span class="ot">&lt;-</span> bechdel <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(result_binary) <span class="sc">|&gt;</span></span>
@@ -3960,33 +3959,17 @@ vertical-align: -.125em;
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop_pass1 =</span> <span class="fu">mean</span>(result_binary, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(prop_pass1)) <span class="sc">|&gt;</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">genre =</span> <span class="fu">fct_reorder</span>(genre, prop_pass1))</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>bechdel1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 22 × 2
-   genre   prop_pass1
-   &lt;fct&gt;        &lt;dbl&gt;
- 1 Music        0.730
- 2 Musical      0.619
- 3 Horror       0.591
- 4 Family       0.579
- 5 Romance      0.571
- 6 &lt;NA&gt;         0.510
- 7 Drama        0.493
- 8 Comedy       0.488
- 9 Fantasy      0.456
-10 Mystery      0.441
-# ℹ 12 more rows</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> bechdel1, <span class="fu">aes</span>(<span class="at">x =</span> genre, <span class="at">y =</span> prop_pass1)) <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Genre&quot;</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Proportion Passing Bechdel Test&quot;</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Bechdel Test Pass Rate by Genre&quot;</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>()) <span class="sc">+</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> bechdel1, <span class="fu">aes</span>(<span class="at">x =</span> genre, <span class="at">y =</span> prop_pass1)) <span class="sc">+</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Genre&quot;</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Proportion Passing Bechdel Test&quot;</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Bechdel Test Pass Rate by Genre&quot;</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3997,18 +3980,18 @@ vertical-align: -.125em;
 </div>
 <p><em>This barplot shows the proportion of movies that pass the Bechdel test based on their genre. It is important to note here that in this dataset, movies have multiple genres listed. To adjust for this, the dataset was tidied to count up each genre that is listed. Meaning that the sample size is larger than the other visualizations since one movie could represent 3 genres therefore placed in each genre in the count. The genre Music has the highest proportion of movies passing while Western has the least. When looking at the bottom of the barplot, the bottom five is crime, action, documentary, war, and western. This makes sense as those movies have usually been dominated by men.</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>time_bechdel <span class="ot">&lt;-</span> bechdel <span class="sc">|&gt;</span> </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">|&gt;</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop_pass =</span> <span class="fu">mean</span>(result_binary, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> time_bechdel, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> prop_pass)) <span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Year&quot;</span>, </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Proportion Passing Bechdel Test&quot;</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Proportion of Films Passing the Bechdel Test Over Time&quot;</span>) <span class="sc">+</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>()) <span class="sc">+</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>time_bechdel <span class="ot">&lt;-</span> bechdel <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">|&gt;</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop_pass =</span> <span class="fu">mean</span>(result_binary, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> time_bechdel, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> prop_pass)) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Year&quot;</span>, </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Proportion Passing Bechdel Test&quot;</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Proportion of Films Passing the Bechdel Test Over Time&quot;</span>) <span class="sc">+</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -4018,8 +4001,8 @@ vertical-align: -.125em;
 </div>
 </div>
 <p><em>This line graph shows that throughout time (1970 - 2013) a higher proportion of movies made that year have passed the Bechdel test. Although it could and should get higher, this graph shows a positive indication the more female representation is occurring. It would be interesting to see movies form 2013-2025 and if the trend continues upward.</em></p>
-<p>##Conclusion and Wrap-Up <em>One limitation of this analysis is the number of NA values in the IMBd rating and genre variable this may slightly limit the conclusions that can be drawn. I didn’t want to exclude those films to avoid tampering with the sample size for the final graph created. Another limitation could be that the number of movies each year is not the same. I don’t believe there are any other flaws with my approach. For future analysis I would explore how budget for the movie relates to passing the Bechdel test. I would also analyze whether there is a significant difference between passing the Bechdel test and gross earnings for the movie.</em></p>
-<p>##Connection to Class Ideas <em>These visualizations connect to class concepts by practicing tidyverse skills and graphic designs. The first plot has error bars that we learned in class. For each of the graph I had to manipulate that dataset a bit to get the desired graphs for the variables I wanted. Together, these design aspects help clearly and effectively communicate patterns in the dataset and integrates class concepts.</em></p>
+<p>#Conclusion and Wrap-Up: <em>One limitation of this analysis is the number of NA values in the IMBd rating and genre variable this may slightly limit the conclusions that can be drawn. I didn’t want to exclude those films to avoid tampering with the sample size for the final graph created. Another limitation could be that the number of movies each year is not the same. I don’t believe there are any other flaws with my approach. For future analysis I would explore how budget for the movie relates to passing the Bechdel test. I would also analyze whether there is a significant difference between passing the Bechdel test and gross earnings for the movie.</em></p>
+<p>#Connection to Class Ideas: <em>These visualizations connect to class concepts by practicing tidyverse skills and graphic designs. The first plot has error bars that we learned in class. For each of the graph I had to manipulate that dataset a bit to get the desired graphs for the variables I wanted. Together, these design aspects help clearly and effectively communicate patterns in the dataset and integrates class concepts.</em></p>
 
 
 
