@@ -1,5 +1,5 @@
 ---
-title: "Data_Visualization_Blogs"
+title: "When Movies Meet Statistics"
 listing:
   contents: posts
   sort: "date desc"
