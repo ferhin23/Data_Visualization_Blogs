@@ -1,5 +1,5 @@
 ---
-title: "Movie Ratings"
+title: "Pixar Movie Ratings"
 author: "Faith Rhinehart"
 execute: 
   echo: true
