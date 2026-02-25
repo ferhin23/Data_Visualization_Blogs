@@ -1,5 +1,5 @@
 ---
-title: "Blog Post #1: Movie Ratings"
+title: "Movie Ratings"
 author: "Faith Rhinehart"
 execute: 
   echo: true
