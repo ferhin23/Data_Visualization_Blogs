@@ -1,12 +1,9 @@
 ---
-title: "The Bechdel Test"
+title: "Pixar Movie Ratings"
 author: "Faith Rhinehart"
-execute: 
-  echo: true
-  warning: false
-format: 
-  html:
-    embed-resources: true
+date: "2026-02-18"
+categories:
+image: Untitled-design51-1493x840.png
 ---
 
 ```{r}

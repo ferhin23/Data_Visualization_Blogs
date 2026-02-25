@@ -1,12 +1,9 @@
 ---
 title: "Pixar Movie Ratings"
 author: "Faith Rhinehart"
-execute: 
-  echo: true
-  warning: false
-format: 
-  html:
-    embed-resources: true
+date: "2026-02-06"
+categories:
+image: pixar.jpg 
 ---
 
 ```{r}
