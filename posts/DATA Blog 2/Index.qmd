@@ -1,5 +1,5 @@
 ---
-title: "Pixar Movie Ratings"
+title: "The Bechdel Test"
 author: "Faith Rhinehart"
 date: "2026-02-18"
 categories:
@@ -16,7 +16,7 @@ movies <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tid
 bechdel <- movies |> mutate(result_binary = if_else(binary == "PASS", 1, 0)) |> select(1, 6, 24, 28, 35)
 ```
 
-\*Introduction:
+**Introduction:**
 
 *The Bechdel Test, created by Alison Bechdel, is a measure of women representation in film and other forms of fiction to expose Hollywood's gender bias. In order to pass the test the work must pass three criteria of having at least two named women that have a conversation with each other and that conversation can not be about a man. This basic criteria allows for the bare minimum amount of depth for female characters. This project looks at a data set movies from 1970 - 2013 of whether or not they pass the Bechdel test or not. The data set includes 1794 observations and 34 variables. The main variables of interest are film title, year of release, binary and IMDb rating. The central question of this analysis is how does the genre, imdb, and budget relate to a movie passing the Bechdel test and how has it change throughout the years.*
 
@@ -24,7 +24,7 @@ bechdel <- movies |> mutate(result_binary = if_else(binary == "PASS", 1, 0)) |> 
 
 *It is important to note that some films have missing values for IMDb rating and genre. This should be considered when interpreting results for these two variables. The binary variable has also been changed to an indicator variable called 'result_binary' where 1 means the film passed the Bechdel test and 0 means the film failed the Bechdel test. This is to allow for easier interpretations.*
 
-\*Primary Visualizations:
+**Primary Visualizations:**
 
 ```{r}
 mean_bechdel <- bechdel |>
@@ -88,10 +88,10 @@ ggplot(data = time_bechdel, aes(x = year, y = prop_pass)) +
 
 *This line graph shows that throughout time (1970 - 2013) a higher proportion of movies made that year have passed the Bechdel test. Although it could and should get higher, this graph shows a positive indication the more female representation is occurring. It would be interesting to see movies form 2013-2025 and if the trend continues upward.*
 
-\*Conclusion and Wrap-Up:
+**Conclusion and Wrap-Up:**
 
 *One limitation of this analysis is the number of NA values in the IMBd rating and genre variable this may slightly limit the conclusions that can be drawn. I didn't want to exclude those films to avoid tampering with the sample size for the final graph created. Another limitation could be that the number of movies each year is not the same. I don’t believe there are any other flaws with my approach. For future analysis I would explore how budget for the movie relates to passing the Bechdel test. I would also analyze whether there is a significant difference between passing the Bechdel test and gross earnings for the movie.*
 
-\*Connection to Class Ideas:
+**Connection to Class Ideas:**
 
 *These visualizations connect to class concepts by practicing tidyverse skills and graphic designs. The first plot has error bars that we learned in class. For each of the graph I had to manipulate that dataset a bit to get the desired graphs for the variables I wanted. Together, these design aspects help clearly and effectively communicate patterns in the dataset and integrates class concepts.*

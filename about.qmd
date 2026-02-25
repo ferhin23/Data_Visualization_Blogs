@@ -1,6 +1,6 @@
 ---
 title: "About This Blog"
-image: profile.jpg
+image: me.jpg
 about:
   template: jolla
   links:
