@@ -3,7 +3,7 @@ title: "The Academy Awards"
 author: "Faith Rhinehart"
 date: "2026-03-11"
 categories:
-image: oscar.mhtml
+image: OSCARS.jpg
 ---
 
 ```{r}
