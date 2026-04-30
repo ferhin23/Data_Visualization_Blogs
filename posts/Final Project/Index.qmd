@@ -126,8 +126,8 @@ ggplotly(baseballplot, tooltip = "text")
 
 **Conclusion and Wrap-Up:**
 
-*One limitation of this analysis is that there could be many more reasons for the trends seen on these graphs. Baseball has been constantly changing and there could have been many confounding variables affecting the data. This could indicate some flaws in my approach, but I tried to account for it as best as possible. For future analysis I would explore how ABS-a rule change in 2026- affects the statistics. I would also look at historical events or how all the teams preformed throughout history in a Shiny App.*
+*One limitation of this analysis is that there could be many more reasons for the trends seen on these graphs. Baseball has been constantly changing and there could have been many confounding variables affecting the data. This could indicate some flaws in my approach, but I tried to account for it as best as possible. For future analysis I would explore how ABS-a rule change in 2026- affects the statistics. I would also look at how historical events affected statistics like strikes, the world wars and more.*
 
 **Connection to Class Ideas:**
 
-*These visualizations connect to class concepts by practicing graphic designs (such as plotly) and data storytelling through research. For each of the graph I had to manipulate that dataset a bit to get the desired graphs for the variables I wanted. Together, these design aspects help clearly and effectively communicate patterns in the dataset and integrates class concepts.*
+*These visualizations connect to class concepts by practicing graphic designs (such as plotly) and data storytelling through research. For each of the graph I had to manipulate that dataset a bit to get the desired graphs for the variables I wanted. Together, these design aspects help clearly and effectively communicate patterns in the dataset and integrates class concepts. This blog post is a mini version of my final project. The full project can be viewed on my GitHub page where the full report and also explores how all the teams preformed throughout history in a Shiny App.*

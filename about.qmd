@@ -12,4 +12,4 @@ about:
       href: https://github.com/ferhin23
 ---
 
-This blog was created while taking Data Visualization 334 at St. Lawrence University. Each post is meant to apply the skills we learned in calss for good visualization practices. I chose to pick data sets that explored movies. I hope you enjoy!
+This blog was created while taking Data Visualization 334 at St. Lawrence University. Each post is meant to apply the skills we learned in class for good visualization practices. I chose to pick data sets that explored movies. The baseball blog post is a mini version of my final project for the class that you can view on my GitHub page. I hope you enjoy!
