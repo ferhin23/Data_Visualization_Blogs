@@ -65,10 +65,10 @@ ggplot(data = runs_scored, aes(x = year, y = runs_scored, colour = period)) +
 
 ##Rule Change #2: The Introduction of a Designated Hitter
 
-*One pivotal change that occurred in 1973 was when the American League introduced a designated hitter. Pitchers were generally not very good hitters so to help the offense and make the more games interesting for fans, a designated hitter (DH) bats in place of the pitcher. The National League did not make this change therefore created a huge difference between the leagues. Even though both leagues will still have the same amount of hitters/players the AL had more runs and more home runs than the NL because a better hitter in the AL can hit instead of the pitcher fir the NL.*
+*One pivotal change that occurred in 1973 was when the American League introduced a designated hitter. Pitchers were generally not very good hitters so to help the offense and make the more games interesting for fans, a designated hitter (DH) bats in place of the pitcher. The National League did not make this change therefore created a huge difference between the leagues. Even though both leagues will still have the same amount of hitters/players the AL had more runs and more home runs than the NL because a better hitter in the AL can hit instead of the pitcher fir the NL. The year 1994, 1981, and 2020 data has been removed since in those years there were significantly less games played because of strikes and the pandemic. They were removed because since all the years are of interest in this plot, they could affect the data.*
 
 ```{r}
-designated_hitter <- Baseball |> filter(year >= "1961") |>
+designated_hitter <- Baseball |> filter(!year %in% c(1981, 1994, 2020)) |>
   mutate(period = if_else(year < 1973, "pre-1973", "post-1973"))
 
 ggplot(data = designated_hitter, aes(x = league_id, y = runs_scored, fill = period)) +
